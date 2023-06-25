@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, FlatList, ScrollView, SafeAreaView, TextInput } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
 import { addTodoMemo, removeTodoMemo } from "./../redux/actions/todoListAction"
