@@ -1,4 +1,4 @@
-import { todoListActions } from "../constants/todoListTypes";
+import { todoListActions, todoSelectActions } from "../constants/todoListTypes";
 
 const addTodoMemo = (memo) => {
     return (dispatch) => {
@@ -18,4 +18,24 @@ const removeTodoMemo = (memo) => {
     };
 };
 
-export { addTodoMemo, removeTodoMemo };
+const selectMemo = (memo) => {
+    return (dispatch) => {
+        dispatch({
+            type: todoSelectActions.SELECT,
+            payload: memo
+        });
+    };
+};
+
+
+const clearSelectMemo = (memo) => {
+    return (dispatch) => {
+        dispatch({
+            type: todoSelectActions.CLEAR,
+            payload: memo
+        });
+    };
+};
+
+
+export { addTodoMemo, removeTodoMemo, selectMemo, clearSelectMemo };
