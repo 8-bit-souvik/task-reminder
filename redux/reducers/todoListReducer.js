@@ -1,4 +1,5 @@
 import { todoListActions } from "../constants/todoListTypes";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const draftTodoState = [];
 
@@ -32,9 +33,12 @@ export const draftTodoReducer = (state = draftTodoState, { type, payload }) => {
 
         const newList = [...filteredMemos, ...payload];
 
-        return newList.sort(function (x, y) {
+        const data = newList.sort(function (x, y) {
           return new Date(x.timeSchedule).getTime() - new Date(y.timeSchedule).getTime();
         })
+        
+        AsyncStorage.setItem("schedules", JSON.stringify(data))
+        return data;
       } else {
         return state;
       }
@@ -57,6 +61,7 @@ export const draftTodoReducer = (state = draftTodoState, { type, payload }) => {
       //   return { id: index + 1, text: todo.text };
       // });
 
+      AsyncStorage.setItem("schedules", JSON.stringify(ModifiedTodoList));
       return ModifiedTodoList;
     }
     default:

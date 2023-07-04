@@ -1,6 +1,9 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { StyleSheet, Text, View, FlatList, ScrollView, SafeAreaView, TextInput, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { Calendar, CalendarList, Agenda } from 'react-native-calendars';
+import { useSelector, useDispatch } from "react-redux";
+import { addTodoMemo, removeTodoMemo, selectMemo } from "./../redux/actions/todoListAction"
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import Header from "./../components/home/header";
 import Lists from "./../components/home/lists";
@@ -18,6 +21,8 @@ export default function Home({ navigation }) {
   const [showDate, setShowDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(`${showDate.getFullYear()}-${showDate.getMonth()}-${showDate.getDate()}`);
   const [openCalendar, setOpenCalendar] = useState(false)
+
+  const dispatch = useDispatch();
 
   const setDate = (date) => {
     if (date == "prev") {
@@ -41,6 +46,18 @@ export default function Home({ navigation }) {
   var markedDates = markedDatesObject();
 
   markedDates[selectedDate] = {...markedDates[selectedDate], selected: true, selectedColor: 'orange' }
+
+
+  useEffect(() => {
+    AsyncStorage.getItem('schedules')
+    .then((data) => {
+      // console.log(JSON.parse(data));
+      dispatch(addTodoMemo(JSON.parse(data)))
+    })
+    .catch((e) => {
+      console.log(e);
+    })
+  }, [])
 
   // console.log(markedDates);
 
