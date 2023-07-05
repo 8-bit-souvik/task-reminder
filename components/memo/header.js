@@ -4,6 +4,8 @@ import { editMemo } from "../../styles/editMemo";
 import { FontAwesome5, MaterialIcons, AntDesign, Entypo } from '@expo/vector-icons';
 import { useSelector, useDispatch } from "react-redux";
 import { addTodoMemo, removeTodoMemo, selectMemo, clearSelectMemo } from "./../../redux/actions/todoListAction"
+import { addAlertPush, cancelAlertPush } from "./../../utils/alarmNotification/pushNotification";
+
 
 export default function Header({ navigation, editorMode, action, id, openCalender, date }) {
     const dispatch = useDispatch();
@@ -20,6 +22,7 @@ export default function Header({ navigation, editorMode, action, id, openCalende
             {
                 text: "Delete", onPress: () => {
                     dispatch(removeTodoMemo(id));
+                    cancelAlertPush({ id: id });
                     dispatch(clearSelectMemo(""));
                     navigation.goBack("Home");
                 }

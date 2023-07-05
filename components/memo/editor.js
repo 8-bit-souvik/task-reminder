@@ -6,6 +6,7 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import { Dropdown } from 'react-native-element-dropdown';
 import { useSelector, useDispatch } from "react-redux";
 import { addTodoMemo, removeTodoMemo, selectMemo } from "./../../redux/actions/todoListAction"
+import { addAlertPush, cancelAlertPush } from "./../../utils/alarmNotification/pushNotification";
 
 
 
@@ -77,7 +78,7 @@ export default function Editor({ id, action, cal, updateCalendar, targetDate }) 
     useEffect(() => {
         if (cal) {
             setCalendarShow(true)
-        }else{
+        } else {
             setCalendarShow(false)
         }
 
@@ -114,6 +115,8 @@ export default function Editor({ id, action, cal, updateCalendar, targetDate }) 
 
     const saveMemo = () => {
         dispatch(addTodoMemo([memo]));
+        const info = { title: memo?.text, date: memo?.timeSchedule }
+        addAlertPush({ id: memo?.id, info: info })
         action("save", { id: uid })
     }
 
