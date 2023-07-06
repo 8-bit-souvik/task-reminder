@@ -13,6 +13,8 @@ npx expo start
 
 ## Usage/Features
 
+### Download apk from [here](https://expo.dev/artifacts/eas/ppW9PReM9komg1JfL3sEEX.apk)
+
 
 #### Home Screen 🏠
 <img src="https://github.com/8-bit-souvik/task-reminder/assets/72222987/b2ea1e62-53fd-4b5d-a3a1-cdab0c558f14" alt="drawing" style="width:250px;"/>
