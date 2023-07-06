@@ -5,8 +5,10 @@ import { MaterialIcons, MaterialCommunityIcons, Foundation, } from '@expo/vector
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useSelector, useDispatch } from "react-redux";
 import { addTodoMemo, removeTodoMemo, selectMemo } from "./../../redux/actions/todoListAction"
+import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 
-export default function Editor({ id }) {
+
+export default function Editor({ id, getConcurrent }) {
     const dispatch = useDispatch();
     const draftTodoDataStore = useSelector(
         (store) => store.draftTodoReducer
@@ -15,16 +17,29 @@ export default function Editor({ id }) {
     const memo = draftTodoDataStore.filter((memo) => { return memo?.id == id });
 
 
-
+    const config = {
+        velocityThreshold: 0.3,
+        directionalOffsetThreshold: 80
+    };
 
 
     return (
-        <View style={editMemo.editorViewContainer}>
+        <GestureRecognizer
+            config={config}
+            // onSwipe={(direction, state) => {
+            //     onSwipe(direction, state);
+            //     console.log(direction);
+            //     console.log(state);
+            // }}
+            onSwipeLeft={(state) => getConcurrent("next")}
+            onSwipeRight={(state) => getConcurrent("prev")}
+            style={editMemo.editorViewContainer}
+        >
 
 
-            <View style={editMemo.editorContainer}>
+            <TouchableOpacity activeOpacity={1} style={editMemo.editorContainer}>
                 <ScrollView style={editMemo.titleContainer}>
-                    <TouchableOpacity>
+                    <TouchableOpacity activeOpacity={1}>
                         <Text
                             placeholder="e.g. I'm starting to learn React Native"
                             style={editMemo.memoTitle}
@@ -59,7 +74,7 @@ export default function Editor({ id }) {
 
 
                 <ScrollView style={editMemo.memoDescription}>
-                    <TouchableOpacity>
+                    <TouchableOpacity activeOpacity={1}>
                         <Text
                         // editable={false}
                         // multiline
@@ -78,9 +93,9 @@ export default function Editor({ id }) {
 
 
 
-            </View>
+            </TouchableOpacity>
 
-            <View style={editMemo.navigateMemo}>
+            {/* <View style={editMemo.navigateMemo}>
                 <View style={editMemo.navButtonPrev}>
                     <Foundation name="previous" size={24} color="white" />
                     <Text style={editMemo.navButtonPrevText}>Prev</Text>
@@ -91,8 +106,8 @@ export default function Editor({ id }) {
                     <Foundation name="next" size={24} color="white" />
 
                 </View>
-            </View>
+            </View> */}
 
-        </View>
+        </GestureRecognizer>
     )
 }

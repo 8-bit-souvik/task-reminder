@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, Alert } from "react-native";
+import { StyleSheet, Text, View, Alert, ToastAndroid, TouchableOpacity, TouchableHighlight } from "react-native";
 import { home } from "./../../styles/home";
 import { FontAwesome5, AntDesign, Foundation, MaterialIcons, Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useSelector, useDispatch } from "react-redux";
 import { addTodoMemo, removeTodoMemo, selectMemo, clearSelectMemo } from "./../../redux/actions/todoListAction"
 import { addAlertPush, cancelAlertPush } from "./../../utils/alarmNotification/pushNotification";
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Header({ setDate, date, setOpenCalendar, openCalendar }) {
 
@@ -18,8 +18,18 @@ export default function Header({ setDate, date, setOpenCalendar, openCalendar })
     );
 
 
-    const refresh = (params) => {
+    const refresh = async (params) => {
         // console.log("SelectedMemos: ", SelectedMemos);
+        const data = await AsyncStorage.getItem("schedules");
+        // console.log(JSON.parse(data));
+        dispatch(addTodoMemo(JSON.parse(data)));
+        ToastAndroid.showWithGravityAndOffset(
+            'Refreshing...',
+            ToastAndroid.SHORT,
+            ToastAndroid.BOTTOM,
+            25,
+            50,
+        );
     }
 
     const deleteItems = (item) => {
@@ -68,24 +78,24 @@ export default function Header({ setDate, date, setOpenCalendar, openCalendar })
     return (
         <View style={home.header}>
             <View style={home.headerDate}>
-                <Text><AntDesign name="caretleft" size={24} color="black" onPress={() => setDate("prev")} /></Text>
-                <Text style={{ fontWeight: 600 }}>{day(date)}</Text>
-                <Text><AntDesign name="caretright" size={24} color="black" onPress={() => setDate("next")} /></Text>
+                <TouchableOpacity style={home.button} onPress={() => setDate("prev")}><AntDesign name="caretleft" size={24} color="black"  /></TouchableOpacity>
+                <Text style={{ fontWeight: 600, width: 90, textAlign: "center" }}>{day(date)}</Text>
+                <TouchableOpacity style={home.button} onPress={() => setDate("next")}><AntDesign name="caretright" size={24} color="black"  /></TouchableOpacity>
             </View>
 
             <View style={home.headerOptions}>
                 {SelectedMemos != 0 ?
                     <>
-                        <AntDesign name="pushpin" size={22} color="black" onPress={() => { pinItems() }} />
-                        <Ionicons name="color-palette-sharp" size={22} color="black" />
-                        <MaterialIcons name="delete" size={22} color="black" onPress={() => { deleteItems() }} />
+                      <TouchableOpacity style={home.button} onPress={() => { pinItems() }} ><AntDesign name="pushpin" size={22} color="black"/></TouchableOpacity>  
+                      <TouchableOpacity style={home.button}  ><Ionicons name="color-palette-sharp" size={22} color="black" /></TouchableOpacity>  
+                      <TouchableOpacity style={home.button} onPress={() => { deleteItems() }} ><MaterialIcons name="delete" size={22} color="black"  /></TouchableOpacity>  
                     </>
                     :
                     <>
-                        <Text style={home.headerText} onPress={() => { setOpenCalendar((calendar) => { return !calendar }) }} >
-                            {!openCalendar? <FontAwesome5 name="calendar-alt" size={22} color="black" />: <MaterialCommunityIcons name="calendar-remove" size={26} color="black" />}
-                        </Text>
-                        <Text style={home.headerText} onPress={() => { refresh() }}><Foundation name="refresh" size={24} color="black" /></Text>
+                        <TouchableOpacity style={home.button} onPress={() => { setOpenCalendar((calendar) => { return !calendar }) }} >
+                            {!openCalendar ? <FontAwesome5 name="calendar-alt" size={22} color="black" /> : <MaterialCommunityIcons name="calendar-remove" size={26} color="black" />}
+                        </TouchableOpacity>
+                        <TouchableOpacity style={home.button} onPress={() => { refresh() }}><Foundation name="refresh" size={24} color="black" /></TouchableOpacity>
                     </>
                 }
 

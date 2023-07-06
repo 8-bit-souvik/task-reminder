@@ -1,6 +1,16 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
+var { height, width, fontScale, scale } = Dimensions.get('window');
 
 export const home = StyleSheet.create({
+    button: {
+        width: 40,
+        height: 40,
+        borderRadius: 50,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        // backgroundColor: "red",
+    },
     container: {
         flex: 1,
         backgroundColor: '#fff',
@@ -23,12 +33,13 @@ export const home = StyleSheet.create({
         display: "flex",
         flexDirection: "row",
         gap: 10,
+        alignItems: "center",
     },
     headerOptions: {
         paddingLeft: 10,
         display: "flex",
         flexDirection: "row",
-        gap: 30,
+        gap: 10,
     },
     headerText: {
         fontSize: 18,
@@ -39,6 +50,7 @@ export const home = StyleSheet.create({
         flex: 1,
         backgroundColor: '#dedede',
         alignItems: 'center',
+        // backgroundColor: "#ffff",
     },
     item: {
         borderRadius: 5,
@@ -77,10 +89,12 @@ export const home = StyleSheet.create({
         borderColor: "blue"
     },
     noItem: {
-        marginTop: 20
+        marginTop: 20,
+        marginHorizontal: 25,
     },
     noItemText: {
-        fontSize: 17,
+        textAlign: "center",
+        fontSize: 20,
         color: "#8f8f8f"
     },
     dismiss: {

@@ -60,19 +60,19 @@ export default function Header({ navigation, editorMode, action, id, openCalende
 
             {editorMode ?
                 <>
-                    <TouchableOpacity style={editMemo.headerDate} onPress={() => { openCalender(true) }}><Text style={editMemo.headerTextUnderLined}>{day(date)}</Text><Entypo name="chevron-small-down" size={27} color="black" /></TouchableOpacity>
+                    <TouchableOpacity activeOpacity={0.5} style={editMemo.headerDate} onPress={() => { openCalender(true) }}><Text style={editMemo.headerTextUnderLined}>{day(date)}</Text><Entypo name="chevron-small-down" size={27} color="black" /></TouchableOpacity>
                     <View style={editMemo.viewHeader}>
-                        <AntDesign name="close" size={24} color="black" onPress={() => { cancelEditing() }} />
+                        <TouchableOpacity  style={editMemo.button} onPress={() => { cancelEditing() }}><AntDesign name="close" size={24} color="black" /></TouchableOpacity>
                         {/* <AntDesign name="check" size={24} color="black" onPress={() => {action("save")}} /> */}
                     </View>
                 </>
 
                 :
                 <>
-                    <TouchableOpacity style={editMemo.headerDate}><Text style={editMemo.headerText}>{day(date)}</Text></TouchableOpacity>
+                    <TouchableOpacity activeOpacity={1} style={editMemo.headerDate}><Text style={editMemo.headerText}>{day(date)}</Text></TouchableOpacity>
                     <View style={editMemo.viewHeader}>
-                        <MaterialIcons name="delete" size={24} color="black" onPress={() => { deleteItems(id) }} />
-                        <FontAwesome5 name="edit" size={21} color="black" onPress={() => { action("edit") }} />
+                        <TouchableOpacity  style={editMemo.button} onPress={() => { deleteItems(id) }}><MaterialIcons name="delete" size={24} color="black" /></TouchableOpacity>
+                        <TouchableOpacity  style={editMemo.button} onPress={() => { action("edit") }}><FontAwesome5 name="edit" size={21} color="black" /></TouchableOpacity>
                     </View>
                 </>
             }

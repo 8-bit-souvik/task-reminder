@@ -72,7 +72,7 @@ export default function Home({ navigation }) {
           onDayPress={onDayPress}
         // onDayLongPress={onDayLongPress}
         />}
-        <Lists navigation={navigation} showDate={showDate} />
+        <Lists navigation={navigation} showDate={showDate} setDate={setDate}/>
         <NewMemo navigation={navigation} showDate={showDate} />
       </View>
     </TouchableWithoutFeedback>

@@ -12,7 +12,7 @@ Notifications.setNotificationHandler({
 
 export const addAlertPush = async ({ id, info }) => {
     const { title, date } = info;
-    console.log("adding push notification...");
+    // console.log("adding push notification...");
     await Notifications.scheduleNotificationAsync({
         content: {
             title: title,
@@ -29,6 +29,6 @@ export const addAlertPush = async ({ id, info }) => {
 
 
 export const cancelAlertPush = async ({ id }) => {
-    console.log("deleting push notification...");
+    // console.log("deleting push notification...");
     await Notifications.cancelScheduledNotificationAsync(id);
 }

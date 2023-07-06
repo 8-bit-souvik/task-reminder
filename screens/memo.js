@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View, FlatList, ScrollView, SafeAreaView, TextInput, TouchableWithoutFeedback, Keyboard } from "react-native";
+import { StyleSheet, Text, View, FlatList, ScrollView, SafeAreaView, TextInput, TouchableWithoutFeedback, Keyboard, ToastAndroid } from "react-native";
 
 import Header from "../components/memo/header";
 import Editor from "../components/memo/editor";
@@ -7,7 +7,13 @@ import Viewer from "../components/memo/viewer";
 
 import { editMemo } from "../styles/editMemo";
 
+import { useSelector, useDispatch } from "react-redux";
+
 export default function Memo({ route, navigation }) {
+    const draftTodoDataStore = useSelector(
+        (store) => store.draftTodoReducer
+    );
+
     // console.log("route: ", route);
     const { id, newMemo, targetDate } = route.params;
 
@@ -54,6 +60,27 @@ export default function Memo({ route, navigation }) {
         setdate(date);
     }
 
+    const getConcurrent = (direction) => {
+        const index = draftTodoDataStore.findIndex((item) => item.id === memoId);
+        if (direction == "prev" && draftTodoDataStore[index - 1]?.id) {
+            setmemoId(draftTodoDataStore[index - 1]?.id);
+            setdate(draftTodoDataStore[index - 1]?.timeSchedule)
+        } else if (direction == "next" && draftTodoDataStore[index + 1]?.id) {
+            setmemoId(draftTodoDataStore[index + 1]?.id);
+            setdate(draftTodoDataStore[index - 1]?.timeSchedule)
+        } else {
+            ToastAndroid.showWithGravityAndOffset(
+                'No more data available',
+                ToastAndroid.SHORT,
+                ToastAndroid.BOTTOM,
+                25,
+                50,
+            );
+        }
+
+        
+    }
+
     return (
         <TouchableWithoutFeedback
             onPress={() => { Keyboard.dismiss() }}
@@ -68,7 +95,7 @@ export default function Memo({ route, navigation }) {
                         </>
                         :
                         <>
-                            <Viewer navigation={navigation} action={action} id={memoId} />
+                            <Viewer navigation={navigation} action={action} id={memoId} getConcurrent={getConcurrent} />
                         </>
                 }
 

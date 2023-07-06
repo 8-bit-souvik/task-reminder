@@ -45,6 +45,15 @@ export const dropDown = StyleSheet.create({
 })
 
 export const editMemo = StyleSheet.create({
+    button: {
+        width: 40,
+        height: 40,
+        borderRadius: 50,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        // backgroundColor: "red",
+    },
     container: {
         flex: 1,
         backgroundColor: '#fff',
@@ -86,7 +95,7 @@ export const editMemo = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "flex-end",
-        gap: 40,
+        gap: 20,
         // paddingHorizontal: 35,
     },
     editHeader: {
@@ -108,6 +117,7 @@ export const editMemo = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "space-between",
         height: height - 120,
+        // backgroundColor: "#ffff"
     },
     lastUpdate: {
         marginTop: 5,
@@ -125,6 +135,7 @@ export const editMemo = StyleSheet.create({
         display: "flex",
         flexDirection: "column",
         gap: 5,
+        // backgroundColor: "#ffff"
     },
     titleContainer: {
         maxHeight: 100,
@@ -189,7 +200,7 @@ export const editMemo = StyleSheet.create({
     alermRepeat: {
         marginTop: 10,
         width: width / 2.2,
-        height: 50,
+        height: 45,
         backgroundColor: "#d4d3d2",
         borderRadius: 5,
         paddingTop: 10,

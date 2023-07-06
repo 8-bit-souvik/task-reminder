@@ -13,9 +13,9 @@ import { addAlertPush, cancelAlertPush } from "./../../utils/alarmNotification/p
 const data = [
     { label: 'Pop up only', value: 'Pop up only' },
     { label: 'Vibrate', value: 'Vibrate' },
-    { label: 'Voice', value: 'Voice' },
-    { label: 'Sound', value: 'Sound' },
-    { label: 'Sound & Vibrate', value: 'Sound & Vibrate' },
+    // { label: 'Voice', value: 'Voice' },
+    // { label: 'Sound', value: 'Sound' },
+    // { label: 'Sound & Vibrate', value: 'Sound & Vibrate' },
 ];
 
 
