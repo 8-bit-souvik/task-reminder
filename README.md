@@ -17,10 +17,8 @@ npx expo start
 <img src="https://github.com/8-bit-souvik/task-reminder/assets/72222987/24954e0a-6f24-4fae-8519-6a3f6fbf3b16" alt="drawing" style="width:250px;"/>
 <img src="https://github.com/8-bit-souvik/task-reminder/assets/72222987/b063b6ef-ed54-4f80-bf85-db83852ed1f3" alt="drawing" style="width:250px;"/>
 
-#### Add a new Task ✔️
+#### Add a new Task ✔️ and get preview 🔍
 <img src="https://github.com/8-bit-souvik/task-reminder/assets/72222987/b2ca0fa6-34fa-4df3-baac-de4dc3d93c07" alt="drawing" style="width:250px;"/>
-
-#### Have a preview 🔍
 <img src="https://github.com/8-bit-souvik/task-reminder/assets/72222987/7f75718d-51ba-46ef-be6a-dac9d754df41" alt="drawing" style="width:250px;"/>
 <img src="https://github.com/8-bit-souvik/task-reminder/assets/72222987/41d392aa-d081-4980-a5ef-28228f0b2c9a" alt="drawing" style="width:250px;"/>
 
