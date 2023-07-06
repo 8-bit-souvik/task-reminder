@@ -7,7 +7,8 @@ import { Dropdown } from 'react-native-element-dropdown';
 import { useSelector, useDispatch } from "react-redux";
 import { addTodoMemo, removeTodoMemo, selectMemo } from "./../../redux/actions/todoListAction"
 import { addAlertPush, cancelAlertPush } from "./../../utils/alarmNotification/pushNotification";
-
+import { makeid } from "./../../utils/general/idGenerator";
+import moment from "moment";
 
 
 const data = [
@@ -26,23 +27,7 @@ export default function Editor({ id, action, cal, updateCalendar, targetDate }) 
         (store) => store.draftTodoReducer
     );
 
-    function makeid(length) {
-        let result = '';
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        const charactersLength = characters.length;
-        let counter = 0;
-        while (counter < length) {
-            result += characters.charAt(Math.floor(Math.random() * charactersLength));
-            counter += 1;
-        }
-        return result;
-    }
-
-
-    // const uid = id ? id : makeid(6);
-
     const [uid, setuid] = useState(id ? id : makeid(6))
-
 
     const [memo, setmemo] = useState(
         draftTodoDataStore.filter((memo) => { return memo?.id == uid })[0] ?
@@ -52,23 +37,12 @@ export default function Editor({ id, action, cal, updateCalendar, targetDate }) 
                 text: "",
                 description: "",
                 timeSchedule: targetDate?.toString() || new Date().toString(),
-                repeat: "Voice",
+                repeat: "Pop up only",
                 lastUpdate: "",
-                color: "default",
+                color: "#f2f2f2",
                 pinned: false
             }
     )
-
-    // useEffect(() => {
-    //     console.log("memo: ", memo);
-    // }, [memo])
-
-
-    // const memo = draftTodoDataStore.filter((memo) => { return memo?.id == id });
-
-    // console.log("id: ", id);
-    // console.log("draftTodoDataStore: ", draftTodoDataStore);
-    // console.log("memo: ", memo);
 
 
     const [isSetTimerDisplay, setTimerShow] = useState(false);
@@ -86,26 +60,19 @@ export default function Editor({ id, action, cal, updateCalendar, targetDate }) 
     }, [cal]);
 
 
-
-
     const changeSelectedDate = (event, selectedDate) => {
         setTimerShow(false)
         setCalendarShow(false)
         updateCalendar(selectedDate.toString())
         const currentDate = selectedDate.toString() || new Date().toString();
         updateMemo("timeSchedule", currentDate);
-        // console.log("timeSchedule", currentDate);
     };
 
     const displayDatepicker = () => {
         setTimerShow(true);
-        // console.log("settimer: ", mytime);
     };
 
-
-
     const [isModeFocus, setIsModeFocus] = useState(false);
-
 
     const updateMemo = (key, value) => {
         setmemo((data) => {
@@ -123,8 +90,6 @@ export default function Editor({ id, action, cal, updateCalendar, targetDate }) 
 
     return (
         <View style={editMemo.editorViewContainer}>
-
-
             <View style={editMemo.editorContainer}>
                 <View style={editMemo.editMemoLabel}><MaterialIcons name="add-circle" size={16} /><Text>Title:</Text></View>
                 <TextInput
@@ -137,13 +102,9 @@ export default function Editor({ id, action, cal, updateCalendar, targetDate }) 
                         // this.textInput.clear()
                     }}
                     onChange={(val) => {
-                        // setmemo((value) => {
-                        //     return ({ ...value, text: val.nativeEvent.text });
-                        // })
                         updateMemo("text", val.nativeEvent.text)
                     }}
                 />
-
 
                 <View style={editMemo.scheduler}>
                     <View style={editMemo.schedulerChild1}>
@@ -153,20 +114,12 @@ export default function Editor({ id, action, cal, updateCalendar, targetDate }) 
                             onPress={displayDatepicker}
                             style={editMemo.dateTimePicker}
                         >
-                            {/* {mytime.toTimeString().slice(0, 5)} */}
-                            {memo?.timeSchedule.slice(16, 21)}
+                            {moment(new Date(memo?.timeSchedule)).format('hh:mm a')}
                         </Text>
                     </View>
 
                     <View style={editMemo.schedulerChild2}>
                         <View style={editMemo.editMemoLabel}><MaterialCommunityIcons name="bell-ring-outline" size={17} color="black" /><Text>Mode:</Text></View>
-
-                        {/* <Text
-                            onPress={displayDatepicker}
-                            style={editMemo.alermRepeat}
-                        >
-                            Repeat every 59 min
-                        </Text> */}
 
                         <View style={dropDown.container}>
                             {/* {renderLabel()} */}
@@ -190,19 +143,9 @@ export default function Editor({ id, action, cal, updateCalendar, targetDate }) 
                                     setIsModeFocus(false);
                                     updateMemo("repeat", item.value)
                                 }}
-                                // renderLeftIcon={() => (
-                                //     <AntDesign
-                                //         style={dropDown.icon}
-                                //         color={isModeFocus ? 'blue' : 'black'}
-                                //         name="Safety"
-                                //         size={20}
-                                //     />
-                                // )}
                                 autoScroll={false}
                             />
                         </View>
-
-
                     </View>
                 </View>
 
@@ -225,13 +168,9 @@ export default function Editor({ id, action, cal, updateCalendar, targetDate }) 
                     }}
                 />
 
-
-
-
-
                 <View style={editMemo.lastUpdate}>
                     <Text style={editMemo.lastUpdateKey}>Last updated:</Text>
-                    <Text style={editMemo.lastUpdateValue}>{memo?.lastUpdate?.slice(0, 21)}</Text>
+                    <Text style={editMemo.lastUpdateValue}>{moment(new Date(memo?.lastUpdate)).calendar()}</Text>
                 </View>
 
                 {isSetTimerDisplay && (
@@ -263,19 +202,6 @@ export default function Editor({ id, action, cal, updateCalendar, targetDate }) 
             </View>
 
             <Button title="Save Memo" color="orange" onPress={saveMemo} />
-
-            {/* <View style={editMemo.navigateMemo}>
-                <View style={editMemo.navButtonPrev}>
-                    <Foundation name="previous" size={24} color="white" />
-                    <Text style={editMemo.navButtonPrevText}>Prev</Text>
-                </View>
-
-                <View style={editMemo.navButtonNext}>
-                    <Text style={editMemo.navButtonNextText}>Next</Text>
-                    <Foundation name="next" size={24} color="white" />
-
-                </View>
-            </View> */}
 
         </View>
     )

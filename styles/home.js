@@ -22,17 +22,27 @@ export const home = StyleSheet.create({
         height: 50,
         // paddingTop: 15,
         // paddingLeft: 20,
-        backgroundColor: "orange",
+        backgroundColor: "#FFA500",
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
         paddingHorizontal: 20,
     },
+    headerColorPalate:{
+        height: 50,
+        backgroundColor: "grey",
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: 16,
+        paddingHorizontal: 20,
+    },
     headerDate: {
         display: "flex",
         flexDirection: "row",
-        gap: 10,
+        gap: 0,
         alignItems: "center",
     },
     headerOptions: {
@@ -84,9 +94,9 @@ export const home = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: "center",
         flexDirection: 'row',
-        borderStyle: "dashed",
+        borderStyle: "solid",
         borderWidth: 2,
-        borderColor: "blue"
+        borderColor: "#4287f5"
     },
     noItem: {
         marginTop: 20,

@@ -189,7 +189,7 @@ export const editMemo = StyleSheet.create({
         borderWidth: 0.5,
         backgroundColor: "#d4d3d2",
         borderRadius: 5,
-        paddingLeft: 25,
+        paddingLeft: 12,
         paddingTop: 8,
         fontSize: 20,
         fontWeight: 600,

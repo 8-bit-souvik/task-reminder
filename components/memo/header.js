@@ -5,6 +5,7 @@ import { FontAwesome5, MaterialIcons, AntDesign, Entypo } from '@expo/vector-ico
 import { useSelector, useDispatch } from "react-redux";
 import { addTodoMemo, removeTodoMemo, selectMemo, clearSelectMemo } from "./../../redux/actions/todoListAction"
 import { addAlertPush, cancelAlertPush } from "./../../utils/alarmNotification/pushNotification";
+import moment from "moment";
 
 
 export default function Header({ navigation, editorMode, action, id, openCalender, date }) {
@@ -47,11 +48,10 @@ export default function Header({ navigation, editorMode, action, id, openCalende
         }
         const today = parseInt(`${new Date(date).getFullYear()}${new Date(date).getMonth()}${new Date(date).getDate()}`) == parseInt(`${new Date().getFullYear()}${new Date().getMonth()}${new Date().getDate()}`);
 
-        // console.log("today ", today);
         if (today) {
             return "Today"
         } else {
-            return `${date?.slice(0, 3)},${date?.slice(3, 10)}`
+            return `${moment(new Date(date)).format("ddd[,] Do MMM")}`
         }
     }
 
@@ -63,10 +63,8 @@ export default function Header({ navigation, editorMode, action, id, openCalende
                     <TouchableOpacity activeOpacity={0.5} style={editMemo.headerDate} onPress={() => { openCalender(true) }}><Text style={editMemo.headerTextUnderLined}>{day(date)}</Text><Entypo name="chevron-small-down" size={27} color="black" /></TouchableOpacity>
                     <View style={editMemo.viewHeader}>
                         <TouchableOpacity  style={editMemo.button} onPress={() => { cancelEditing() }}><AntDesign name="close" size={24} color="black" /></TouchableOpacity>
-                        {/* <AntDesign name="check" size={24} color="black" onPress={() => {action("save")}} /> */}
                     </View>
                 </>
-
                 :
                 <>
                     <TouchableOpacity activeOpacity={1} style={editMemo.headerDate}><Text style={editMemo.headerText}>{day(date)}</Text></TouchableOpacity>

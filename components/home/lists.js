@@ -8,7 +8,6 @@ import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures'
 import { home } from "./../../styles/home";
 
 export default function Lists({ navigation, showDate, setDate }) {
-    // const [day, setday] = useState();
 
     const dispatch = useDispatch();
     const draftTodoDataStore = useSelector(
@@ -58,14 +57,8 @@ export default function Lists({ navigation, showDate, setDate }) {
     };
 
     function onSwipe(gestureName, gestureState) {
-        const { SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT } = swipeDirections;
+        const { SWIPE_LEFT, SWIPE_RIGHT } = swipeDirections;
         switch (gestureName) {
-            case SWIPE_UP:
-                console.log(gestureName);
-                break;
-            case SWIPE_DOWN:
-                console.log(gestureName);
-                break;
             case SWIPE_LEFT:
                 console.log(gestureName);
                 break;
@@ -81,8 +74,6 @@ export default function Lists({ navigation, showDate, setDate }) {
             config={config}
             // onSwipe={(direction, state) => {
             //     onSwipe(direction, state);
-            //     console.log(direction);
-            //     console.log(state);
             // }}
             onSwipeLeft={(state) => setDate("next")}
             onSwipeRight={(state) => setDate("prev")}
@@ -106,15 +97,13 @@ export default function Lists({ navigation, showDate, setDate }) {
                             <ScrollView style={{ marginBottom: 25 }} horizontal={false}>
                                 {todaysMemoList.map((item) => {
                                     return (
-                                        <TouchableOpacity activeOpacity={0.7} key={item?.id} style={SelectedMemos.includes(item?.id) ? home.selectedItem : home.item}
+                                        <TouchableOpacity activeOpacity={0.7} key={item?.id} style={[SelectedMemos.includes(item?.id) ? home.selectedItem : home.item, { backgroundColor: item?.color }]}
                                             onLongPress={() => { select(item) }} onPress={() => { SelectedMemos != 0 ? select(item) : navigation.push('Memo', { id: item?.id }) }}
                                         >
                                             <View>
                                                 <Text><Entypo name='arrow-bold-right' size={16} color={"#e0638d"} /> {item?.text} </Text>
                                                 <Text style={home.timeToGo}> {ttg(item?.timeSchedule)} </Text>
                                             </View>
-
-
 
                                             {item?.pinned ? <Entypo name="pin" size={24} color="black" style={{ position: "absolute", top: -10, right: 0 }} /> : <></>}
 
@@ -126,7 +115,6 @@ export default function Lists({ navigation, showDate, setDate }) {
                                     )
                                 })}
                             </ScrollView>
-
                         }
                     </View>
                 </View>

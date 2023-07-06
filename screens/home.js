@@ -39,8 +39,6 @@ export default function Home({ navigation }) {
   const onDayPress = useCallback((day) => {
     setSelectedDate(day.dateString);
     setShowDate(new Date(day.timestamp));
-    // setOpenCalendar(false);
-    // console.log(day);
   }, [selectedDate]);
 
   var markedDates = markedDatesObject();
@@ -51,7 +49,6 @@ export default function Home({ navigation }) {
   useEffect(() => {
     AsyncStorage.getItem('schedules')
     .then((data) => {
-      // console.log(JSON.parse(data));
       dispatch(addTodoMemo(JSON.parse(data)))
     })
     .catch((e) => {
