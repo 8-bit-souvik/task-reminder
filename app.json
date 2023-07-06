@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "todo-list",
+    "name": "Task reminder",
     "slug": "todo-list",
-    "version": "2.2.0",
+    "version": "3.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -22,7 +22,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.the8bitsouvik.todolist"
+      "package": "com.the8bitsouvik.taskreminder"
     },
     "web": {
       "favicon": "./assets/favicon.png"
