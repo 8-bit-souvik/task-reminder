@@ -151,7 +151,7 @@ export const editMemo = StyleSheet.create({
     },
     descriptionInput: {
         marginBottom: 15,
-        paddingHorizontal: 10,
+        padding: 10,
         borderRadius: 5,
         borderColor: 'gray',
         borderWidth: 0.5,
@@ -160,6 +160,7 @@ export const editMemo = StyleSheet.create({
         alignContent: "flex-start",
         alignItems: "flex-start",
         justifyContent: "flex-start",
+        textAlignVertical: 'top'
     },
     scheduler: {
         display: "flex",
