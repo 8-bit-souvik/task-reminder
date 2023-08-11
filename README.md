@@ -13,7 +13,7 @@ npx expo start
 
 ## Usage/Features
 
-### Download apk from [here](https://expo.dev/artifacts/eas/ppW9PReM9komg1JfL3sEEX.apk)
+### Download apk from [here](https://expo.dev/artifacts/eas/dn5868gSb9iTYcRfPb12oq.apk)
 
 
 #### Home Screen 🏠
